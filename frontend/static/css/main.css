@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.mypass_text {
+    width: 25vw;
+    max-width: 250px;
+    min-width: 200px;
+    left: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
