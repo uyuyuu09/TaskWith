@@ -9,7 +9,7 @@ from google.oauth2.credentials import Credentials
 GET_SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 
-def get_calender():
+def get_calendar():
     creds = None
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', GET_SCOPES)
@@ -37,9 +37,13 @@ def get_calender():
 
     CALENDAR_ID = "c_7d7179e8a57398a79e70d4d38f64c9bd71704e01af3c45bb048e6bd58ab3cd63@group.calendar.google.com"
 
-    events_result = service.events().list(calendarId=CALENDAR_ID, timeMin=timeMin, timeMax=timeMax,
-                                        maxResults=100, singleEvents=True,
-                                        orderBy='startTime').execute()
+    events_result = service.events().list(
+                        calendarId=CALENDAR_ID,
+                        timeMin=timeMin,
+                        timeMax=timeMax,
+                        singleEvents=True,
+                        orderBy='startTime'
+    ).execute()
     events = events_result.get('items', [])
 
     if not events:
@@ -49,4 +53,4 @@ def get_calender():
         print(start, event['summary'])
 
 if __name__ == "__main__":
-    get_calender()
+    get_calendar()
