@@ -1,16 +1,17 @@
-from __future__ import print_function
 import datetime
 import os.path
+import json
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
+from fastapi import Depends, HTTPException, status
 
-GET_SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
-
-def get_calendar():
+def getCalendar(id: str):
+    GET_SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
     creds = None
+    # 以下2つのjsonファイルはbackend/直下
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', GET_SCOPES)
     if not creds or not creds.valid:
@@ -25,32 +26,28 @@ def get_calendar():
 
     service = build('calendar', 'v3', credentials=creds)
 
-    # 現在の日時を取得
     today = datetime.datetime.utcnow()
-
-    # 一週間後の日時を計算
     next_week = today + datetime.timedelta(days=7)
 
     # 日時を ISO 8601 形式に変換
     timeMin = today.isoformat() + 'Z'
     timeMax = next_week.isoformat() + 'Z'
 
-    CALENDAR_ID = "c_7d7179e8a57398a79e70d4d38f64c9bd71704e01af3c45bb048e6bd58ab3cd63@group.calendar.google.com"
-
+    CALENDAR_ID = id
     events_result = service.events().list(
-                        calendarId=CALENDAR_ID,
-                        timeMin=timeMin,
-                        timeMax=timeMax,
-                        singleEvents=True,
-                        orderBy='startTime'
+        calendarId=CALENDAR_ID,
+        timeMin=timeMin,
+        timeMax=timeMax,
+        singleEvents=True,
+        orderBy='startTime'
     ).execute()
     events = events_result.get('items', [])
 
+    content = []
     if not events:
-        print('No upcoming events found.')
+        print('表示する内容がありません。')
     for event in events:
         start = event['start'].get('dateTime', event['start'].get('date'))
         print(start, event['summary'])
-
-if __name__ == "__main__":
-    get_calendar()
+        content.append({"開始時間": start, "イベント名": event['summary']})
+    return content
