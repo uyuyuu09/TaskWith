@@ -4,8 +4,7 @@ import uvicorn
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from api.get.get_calendar_id import get_all_calendar
-from router import user
+from router import users
 
 app = FastAPI()
 
@@ -15,7 +14,7 @@ origins = [
     "*",
     "http://localhost",
     "http://localhost:8000",
-    "http://192.168.0.41:3000"
+    "http://192.168.0.41:3000",
 ]
 
 app.add_middleware(
@@ -26,7 +25,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(user.router)
+app.include_router(users.router)
 
 @app.get("/")
 async def root():
