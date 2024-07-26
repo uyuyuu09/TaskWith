@@ -11,4 +11,4 @@ class User(Base):
     password = Column(String)
     admin = Column(Boolean, unique=False, default=False)
 
-    tickets = relationship("Ticket", back_populates="user")
+    # tickets = relationship("Ticket", back_populates="user")
