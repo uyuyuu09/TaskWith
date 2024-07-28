@@ -1,4 +1,3 @@
-
 <script lang="ts" setup>
     import { validateFormData } from '~/composables/validation';
     import { useUserStore } from '~/composables/auth';

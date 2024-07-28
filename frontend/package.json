@@ -10,7 +10,6 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/image": "^1.7.0",
     "@nuxtjs/auth": "^1.0.2",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
     "@pinia/nuxt": "^0.5.1",
@@ -20,8 +19,6 @@
     "vue": "latest"
   },
   "devDependencies": {
-    "@vite-pwa/assets-generator": "^0.2.4",
-    "@vite-pwa/nuxt": "^0.9.1",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.4"
