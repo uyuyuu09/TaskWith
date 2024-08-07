@@ -3,7 +3,7 @@
     const userStore = useUserStore();
     onMounted(() => {
         if (userStore.isLoggedIn && getCookie("token") && getCookie("email") && getCookie("password") ) {
-            navigateTo("/")
+            navigateTo("/");
         } else {
             console.log("User data was not find. Please Login to TaskWith App!");
         }

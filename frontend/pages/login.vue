@@ -34,12 +34,12 @@
         } else if (val_res.cur_email && !val_res.cur_pass) {
             email_val.value = "";
             password_val.value = "form_val_error";
-            email_error_msg.value = ""
-            pass_error_msg.value = "パスワードは8文字以上にしてください。"
+            email_error_msg.value = "";
+            pass_error_msg.value = "パスワードは8文字以上にしてください。";
         } else if (!val_res.cur_email && val_res.cur_pass) {
             email_val.value = "form_val_error";
             password_val.value = "";
-            email_error_msg.value = "有効なメールアドレスを入力してください。"
+            email_error_msg.value = "有効なメールアドレスを入力してください。";
             pass_error_msg.value = "";
         } else if (!val_res.cur_email && !val_res.cur_pass) {
             email_val.value = "form_val_error";

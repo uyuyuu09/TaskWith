@@ -68,7 +68,6 @@ export async function callLogin(email: string, password: string) {
             }
             const json_accessToken = await getToken.json();
             const token = json_accessToken.access_token;
-            // setCookie('token', accessToken);
             const response = await fetch("http://192.168.0.41:8000/users/me", {
                 method: 'GET',
                 headers: {
@@ -79,7 +78,6 @@ export async function callLogin(email: string, password: string) {
                 throw new Error(`User data fetch error: ${response.status}`);
             }
             userData = await response.json();
-            // console.log("token:" + token, userData);
             return { token, userData };
         } else {
             const response = await fetch("http://192.168.0.41:8000/users/me", {
@@ -93,7 +91,6 @@ export async function callLogin(email: string, password: string) {
             }
             const token = accessToken
             userData = await response.json();
-            // console.log("token:" + token, userData);
             return { token, userData };
         }
     } catch (error) {
