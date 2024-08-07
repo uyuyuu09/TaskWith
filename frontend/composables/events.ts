@@ -1,7 +1,7 @@
 import { getCookie } from '~/composables/cookie';
 
 export async function create_events(event_name: string, start_time: string, end_time: string, memo: string) {
-    const Token = getCookie('accessToken');
+    const Token = getCookie('token');
     const create_event = await fetch("http://192.168.0.41:8000/events/create_event", {
         method: 'POST',
         headers: {
