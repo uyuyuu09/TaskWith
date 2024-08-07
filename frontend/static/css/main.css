@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.mypass_text {
+.taskwith_logo {
     width: 25vw;
     max-width: 250px;
     min-width: 200px;
