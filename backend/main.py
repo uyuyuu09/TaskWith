@@ -5,6 +5,7 @@ from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from router import users
+from router import events
 
 app = FastAPI()
 
@@ -26,10 +27,11 @@ app.add_middleware(
 )
 
 app.include_router(users.router)
+app.include_router(events.router)
 
 @app.get("/")
 async def root():
     return {'status':'ok'}
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app)

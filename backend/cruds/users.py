@@ -7,15 +7,19 @@ import jwt
 from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
+import os
+from dotenv import load_dotenv
 
 import database
 from schemas import users as schemas
 from models import users as models
 
+load_dotenv()
+
 # to hash
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 # SECRET
-SECRET_KEY ='4d03bc07e98d6cf56b5f2ca41362e7bfa8e293603259863930f2684cd479148a'
+SECRET_KEY = os.getenv('SECRET_KEY')
 # jwt algorithm
 ALGORITHM = 'HS256'
 
@@ -32,7 +36,7 @@ def verify_password(plain_password: str, hashed_password: str):
 
 
 # gen token
-def create_access_token(email:str, user_id: int, expires_delta: timedelta = timedelta(minutes=60)):
+def create_access_token(email:str, user_id: int, expires_delta: timedelta = timedelta(minutes=1)):
     encode = {'sub': email, 'id': user_id}
     expires = datetime.now(timezone.utc) + expires_delta
     encode.update({'exp': expires})

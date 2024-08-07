@@ -10,5 +10,4 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     password = Column(String)
     admin = Column(Boolean, unique=False, default=False)
-
-    # tickets = relationship("Ticket", back_populates="user")
+    events = relationship("Event", back_populates="user")

@@ -47,8 +47,6 @@ async def login_for_access_token(req: schemas.UserLogin, db: Session = Depends(d
         raise HTTPException(status_code=400, detail='Could not validate user')
     
     token = crud.create_access_token(user.email, user.id)
-
-
     return {'access_token': token, 'token_type':'bearer'}
 
 
