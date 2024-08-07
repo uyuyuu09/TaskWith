@@ -20,8 +20,16 @@
             email_error_msg.value = "";
             password_error_msg.value = "";
             try {
-                await signUp(email.value, password.value);
-                navigateTo("/");
+                const { token, userData } = await signUp(email.value, password.value) as {token: string, userData: any};
+                await userStore.login(userData.email, userData.password);
+                if (userStore.isLoggedIn) {
+                    await setCookie("token", token);
+                    await setCookie("email", userData.email);
+                    await setCookie("password", userData.password);
+                    navigateTo("/");
+                } else {
+                    console.log("store error")
+                }
             } catch (error) {
                 window.alert(signupfailed_msg.value);
             };

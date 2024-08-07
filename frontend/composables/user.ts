@@ -27,29 +27,26 @@ export async function signUp(email: string, password: string) {
         if (!getToken.ok) {
             throw new Error(`HTTP error status: ${getToken.status}`);
         }
-        const accessToken = await getToken.json();
-        setCookie('accessToken', accessToken.access_token);
-
+        const json_accessToken = await getToken.json();
+        setCookie("accessToken", await json_accessToken.access_token);
         let userData: any = null;
-        const getAccessToken = getCookie('accessToken');
-        if (getAccessToken) {
-            const response = await fetch("http://192.168.0.41:8000/users/me", {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${getAccessToken}`
-                }
-            });
-            if (!response.ok) {
-                throw new Error(`User data fetch error: ${response.status}`);
+        const token = getCookie('accessToken');
+
+        const auth_fetch = await fetch("http://192.168.0.41:8000/users/me", {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
             }
-            userData = await response.json();
+        });
+        if (!auth_fetch.ok) {
+            throw new Error(`User data fetch error: ${auth_fetch.status}`);
         }
-        return { accessToken, userData };
+        userData = await auth_fetch.json();
+        return { token, userData };
     } catch (error) {
         console.error('Error:', error);
     }
 }
-
 
 export async function callLogin(email: string, password: string) {
     try {
