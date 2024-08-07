@@ -3,8 +3,8 @@
 
     const userStore = useUserStore();
     onMounted(() => {
-        if (userStore.isLoggedIn) {
-            console.log("OK");
+        if (userStore.isLoggedIn && getCookie("token") && getCookie("email") && getCookie("password") ) {
+            console.log("User loggined. Welcome to TaskWith App!");
         } else {
             navigateTo("/topselect");
         }

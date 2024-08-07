@@ -7,7 +7,7 @@
     <section>
         <div class="flex flex-col items-center justify-center px-4 py-8 mx-auto lg:py-0" style="height: 100svh;">
             <p class="flex items-center mb-6 text-3xl font-semibold text-gray-900 dark:text-white">
-                <img class="mypass_text" src="~/public/TaskWith.webp" alt="TaskWith ~Every Day With You~" id="logo">
+                <img class="taskwith_logo" src="~/public/TaskWith.webp" alt="TaskWith ~Every Day With You~" id="logo">
             </p>
             <!-- <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white pb-5">
                 ようこそ
