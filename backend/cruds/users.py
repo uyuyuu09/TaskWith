@@ -36,7 +36,7 @@ def verify_password(plain_password: str, hashed_password: str):
 
 
 # gen token
-def create_access_token(email:str, user_id: int, expires_delta: timedelta = timedelta(minutes=1)):
+def create_access_token(email:str, user_id: int, expires_delta: timedelta = timedelta(minutes=180)):
     encode = {'sub': email, 'id': user_id}
     expires = datetime.now(timezone.utc) + expires_delta
     encode.update({'exp': expires})

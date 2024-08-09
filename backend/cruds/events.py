@@ -51,12 +51,12 @@ from models import events as models
 #     db.refresh(tickes)
 #     return tickes
 
-def create_event(db:Session, user, event_name, start_time, end_time, memo):
+def create_event(db:Session, user: str, events: schemas.Event):
     event = models.Event(
-        event_name = event_name,
-        start_time = start_time,
-        end_time = end_time,
-        memo = memo
+        event_name = events.event_name,
+        start_time = events.start_time,
+        end_time = events.end_time,
+        memo = events.memo
     )
     db.add(event)
     db.commit()

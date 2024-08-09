@@ -10,7 +10,6 @@ from pydantic import BaseModel
 # About tickets 
 
 class Event(BaseModel):
-    id: int
     event_name: str
     start_time: str
     end_time: str
