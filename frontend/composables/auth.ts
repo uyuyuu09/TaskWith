@@ -28,7 +28,9 @@ export const useUserStore = defineStore('user', {
             }
         },
         async logout() {
-            setCookie('accessToken', '');
+            setCookie('token', '');
+            setCookie('email', '');
+            setCookie('password', '');
             this.isLoggedIn = false;
             this.user = null;
         },
@@ -36,7 +38,7 @@ export const useUserStore = defineStore('user', {
     persist: {
         storage: persistedState.cookiesWithOptions({
             sameSite: 'strict',
-            maxAge: 60 * 60,
+            maxAge: 60 * 60 * 3,
         }),
     },
 });
