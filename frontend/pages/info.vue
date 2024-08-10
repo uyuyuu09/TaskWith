@@ -1,27 +1,27 @@
 <script setup lang="ts">
-    const display_time = ref("");
-    const intervalId = ref<number | null>(null);
-    onMounted(() => {
-        intervalId.value = window.setInterval(() => {
-            let nowTime = new Date();
-            let nowYoubi = ["日", "月", "火", "水", "木", "金", "土"][nowTime.getDay()];
-            let nowHour = set2fig(nowTime.getHours());
-            let nowMin = set2fig(nowTime.getMinutes());
-            let nowSec = set2fig(nowTime.getSeconds());
-            let currentTime = `${nowTime.getMonth() + 1}/${nowTime.getDate()} (${nowYoubi}) ${nowHour}:${nowMin}:${nowSec}`;
-            display_time.value = currentTime;
-        }, 100);
-    });
+const display_time = ref("");
+const intervalId = ref<number | null>(null);
+onMounted(() => {
+    intervalId.value = window.setInterval(() => {
+        let nowTime = new Date();
+        let nowYoubi = ["日", "月", "火", "水", "木", "金", "土"][nowTime.getDay()];
+        let nowHour = set2fig(nowTime.getHours());
+        let nowMin = set2fig(nowTime.getMinutes());
+        let nowSec = set2fig(nowTime.getSeconds());
+        let currentTime = `${nowTime.getMonth() + 1}/${nowTime.getDate()} (${nowYoubi}) ${nowHour}:${nowMin}:${nowSec}`;
+        display_time.value = currentTime;
+    }, 100);
+});
 
-    onUnmounted(() => {
-        if (intervalId.value!== null) {
-            clearInterval(intervalId.value);
-        }
-    });
-
-    function set2fig(num: Number) {
-        return String(num).padStart(2, '0');
+onUnmounted(() => {
+    if (intervalId.value !== null) {
+        clearInterval(intervalId.value);
     }
+});
+
+function set2fig(num: Number) {
+    return String(num).padStart(2, '0');
+}
 </script>
 
 <template>
@@ -45,7 +45,7 @@
                         <div class="flex-grow">
                             <h2 class="text-gray-900 title-font font-medium">ログイン情報</h2>
                             <p class="text-gray-500">現在のログイン情報を表示します。ログインされていない場合はログイン画面へリンクします。</p>
-                        </div>  
+                        </div>
                     </div>
                 </nuxt-link>
                 <nuxt-link to="#" target="_blank" class="p-2 lg:w-1/3 md:w-1/2 w-full">

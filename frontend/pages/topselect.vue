@@ -1,16 +1,16 @@
 <script setup lang="ts">
-    import { useUserStore } from '~/composables/auth';
-    const userStore = useUserStore();
-    onMounted(() => {
-        if (userStore.isLoggedIn && getCookie("token") && getCookie("email") && getCookie("password") ) {
-            navigateTo("/");
-        } else {
-            console.log("User data was not find. Please Login to TaskWith App!");
-        }
-    });
-    definePageMeta({
-        layout: false,
-    });
+import { useUserStore } from '~/composables/auth';
+const userStore = useUserStore();
+onMounted(() => {
+    if (userStore.isLoggedIn && getCookie("token") && getCookie("email") && getCookie("password")) {
+        navigateTo("/");
+    } else {
+        console.log("User data was not find. Please Login to TaskWith App!");
+    }
+});
+definePageMeta({
+    layout: false,
+});
 </script>
 <template>
     <section>
