@@ -25,7 +25,6 @@ from utils.date import get_current_date
 class Event(Base):
     __tablename__ = "events"
     id = Column(Integer, primary_key=True)
-    user = Column(String)
     event_name = Column(String, unique=False)
     start_time = Column(DateTime)
     end_time = Column(DateTime)

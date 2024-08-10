@@ -26,5 +26,11 @@ router = APIRouter(
 async def create_event(req: schemas.Event,
                        db: Session = Depends(database.db_session),
                        user: User = Depends(get_current_user)):
-    event = crud.create_event(db, user, req)
+    event = crud.create_event(db, req, user)
+    return event
+
+@router.get('/get')
+async def get_event(db: Session = Depends(database.db_session),
+                    user: User = Depends(get_current_user)):
+    event = crud.get_event(db, user)
     return event

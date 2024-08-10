@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+import datetime
 
 
 # # About Display 
@@ -11,6 +12,8 @@ from pydantic import BaseModel
 
 class Event(BaseModel):
     event_name: str
-    start_time: str
-    end_time: str
+    start_time: datetime
+    end_time: datetime
     memo: str
+    class Config:
+        arbitrary_types_allowed = True

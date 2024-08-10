@@ -51,14 +51,21 @@ from models import events as models
 #     db.refresh(tickes)
 #     return tickes
 
-def create_event(db:Session, user: str, events: schemas.Event):
+def create_event(db:Session, events: schemas.Event, user):
     event = models.Event(
         event_name = events.event_name,
-        start_time = events.start_time,
-        end_time = events.end_time,
-        memo = events.memo
+        start_time = datetime.fromisoformat(events.start_time),
+        end_time = datetime.fromisoformat(events.end_time),
+        memo = events.memo,
+        user_id = user.id
     )
     db.add(event)
     db.commit()
     db.refresh(event)
     return event
+
+def get_event(db:Session, user):
+        events = db.query(models.Event).filter(models.Event.user_id == user.id).all()
+        if not events:
+              return False
+        return events
